@@ -43,6 +43,27 @@ Access the app locally through a structured URL format:
 ```plaintext
 http://localhost:3000/?workerId=<worker_id>&assignmentId=<assignment_id>&hitId=<hit_id>&turkSubmitTo=<submission_url>
 ```
+## Deployment
+
+To deploy the Meteor app locally, use the following example commands to set up the environment variables and start the application. **Note:** Adjust these commands according to your specific setup; the following is just an example.
+
+```bash
+# Set the port number for the application
+port_num='127.0.0.1:3000'
+
+# Set the root URL for the application
+root_url='https://yourdomain.com/yourapp'
+
+# Export the ROOT_URL and BIND_UP variables
+export ROOT_URL=$root_url
+export BIND_UP=$port_num
+
+# Start the Meteor app on the specified port
+meteor run --port $port_num
+
+# Notify deployment completion
+echo "Deployment finished"
+```
 
 ### Directory Structure
 
