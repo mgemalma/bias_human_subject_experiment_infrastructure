@@ -6,7 +6,7 @@ This repository supports the data collection infrastructure for the research pro
 *Collecting large-scale human-annotated datasets via crowdsourcing is crucial for training and improving automated models in human-in-the-loop AI systems. However, biases, particularly confirmation bias, can affect data quality and, consequently, model performance. This paper presents a bias-aware label aggregation algorithm that factors in crowd workers' varying levels of confirmation bias, enhancing ground-truth inference from crowdsourced data. Real-world and synthetic data evaluations demonstrate the algorithm's advantage over baseline methods in tasks where workers exhibit confirmation bias.*
 
 ### Overview
-This repository provides the web application and backend infrastructure to collect crowd-sourced annotations. The web app is built on Meteor, following a structure similar to other crowd annotation systems, and includes templates and JavaScript files to facilitate data collection across various user interactions.
+This repository provides the web application and backend infrastructure to collect crowdsourced annotations. The web app is built on Meteor, following a structure similar to other crowd annotation systems, and includes templates and JavaScript files to facilitate data collection across various user interactions.
 
 ### Installation
 
