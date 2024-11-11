@@ -1,4 +1,4 @@
-# Crowdsourced Label Aggregation with Confirmation Bias Correction
+# Crowdsourced Label Aggregation with Confirmation Bias Mitigation
 
 This repository supports the data collection infrastructure for the research project *"Accounting for Confirmation Bias in Crowdsourced Label Aggregation"*, which investigates how confirmation bias affects crowdsourced label quality and proposes a novel algorithm to account for this bias in aggregating crowd annotations. This research explores human bias in crowd annotation and aims to enhance the reliability of human-in-the-loop systems by accurately inferring task ground truths while considering cognitive biases.
 
