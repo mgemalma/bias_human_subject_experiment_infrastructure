@@ -1,0 +1,289 @@
+<template name = "home" >
+
+<head >
+
+<style>
+
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #FFFFFF;
+}
+
+.navbar {
+
+  background-color: #333;
+    position: fixed;
+    top: 0; /* Position the navbar at the top of the page */
+  width: 100%;
+    z-index: 1;
+
+}
+
+.navbar a {
+  float: right;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.dropdown {
+  float: right;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+  background-color: #A0A0A0;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a.logout {
+  background-color: red;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content a.logout:hover {
+  background-color: #7C0A0A;
+}
+
+
+.split {
+  height: 100%;
+  width: 50%;
+
+  z-index: -1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+  margin-top: 46px;
+}
+
+/* Control the left side */
+.left {
+  left: 0;
+  width: 100%;
+  height: 1000px;
+  background-color: white;
+}
+
+/* Control the right side */
+.right {
+  right: 0;
+  width: 30%;
+  background-color: #567598;
+}
+
+/* If you want the content centered horizontally and vertically */
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+/* Style the image inside the centered container, if needed */
+.centered img {
+  width: 150px;
+  border-radius: 50%;
+}
+
+ul
+{
+  text-align: left;
+
+}
+ .split_right, h2
+{
+  display: none;
+}
+
+.button {
+  background-color: #4CAF50;
+  border: outset;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+#Instructions
+{
+  background-color: #DDDDDD;
+  border: 10px;
+  border-style: outset;
+  padding: 20px;
+  width: 700px;
+  margin: 0 auto;
+  font-family: Arial, Helvetica;
+  font-size: 16pt;
+
+}
+
+.TEXT
+{
+  text-align: left;
+}
+
+</style>
+</head>
+<body>
+
+  {{#if example}}
+  {{/if}}
+
+
+
+<div class="navbar" style= "width: %100; height: 53px;
+   margin: 0;
+   padding: 0;
+   background-color:#000
+   top: 0;
+   left: 0;" >
+
+
+
+
+
+
+</div>
+</body>
+{{#if currentUser}}
+<div name = "leftOne" id = "leftOne" class="split left">
+
+  <div id = "Instructions">
+    <h2>Instructions</h2>
+
+
+      <p class="TEXT">
+        <b>Welcome to our HIT!</b>
+      </p>
+      <p class = "TEXT">
+        In this HIT, you will be asked to read through a sequence of 13 statements related to gun control. For each of the statements, you will be asked to evaluate that in a debate about “should more gun control laws be enacted?”, whether the  statement is more likely  to be used as an argument by a person holding liberal view or a person holding conservative view to support his/her view. Detailed instructions will be provided on later pages. You can only take this HIT once.
+      </p>
+
+  </div>
+  <input id = "Accept" class = "button" type="button" value= {{getText}}>
+   <script>
+   var button= document.getElementById('Accept');
+   button.onclick = function()
+   {
+     //alert(Session.get("worker_Id"));
+     // if (Session.get("worker_Id") == "ASSIGNMENT_ID_NOT_AVAILABLE")
+     // {
+     //     alert("Please accept the HIT first!");
+     //     return;
+     // }
+     //Session.set("buttonClicked",true);
+     window.history.pushState("", "", Session.get("path_new")+ "/instructions");
+   window.location.href = Session.get("path_new") + "/instructions";
+   }
+   </script>
+  <div class="centered">
+  </div>
+</div>
+{{/if}}
+
+<div class="split_right" >
+  <div class="centered">
+    <div id = "ChatMessages" style = " overflow-x: hidden;  overflow-y: scroll; background-color: #333; height: 600px; width: 300px;">
+      <ul>{{#each message}}
+        {{> messageItem}}
+        <script>
+        var objDiv = document.getElementById('ChatMessages');
+        objDiv.scrollTop = objDiv.scrollHeight;
+        </script>
+        {{/each}}</ul>
+      <form class = "chatBar" style = "position: fixed;
+  bottom: 120px;">
+      <textarea style = "font-size: 15px; width: 230px; height: 20px; position: absolute;
+  bottom: 38px; padding-bottom: 4px;" type="text" id = "chatContent"></textarea><input style = "position: absolute; width: 60px; height: 27px;
+bottom: 38px; left: 238px; font-size: 14px; color: white; background-color: #334475; border-style: solid; border-width: 2px; border-color:white" type="submit" value="Submit">
+    </form>
+    </div>
+    <br>
+    <br>
+    <h2>Chat With Requester</h2>
+    <br>
+    <br>
+    <br>
+  </div>
+</div>
+
+</template>
+
+<template  name="messageItem"  >
+  <div style = " border-style: solid; border-color : #333; background-color : #808080; height: auto;  width: 296px;  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-171px, -15px);
+  text-align: center;
+  ">
+  {{#if admin}}
+<h4 style = "color: #92E2A4; text-align: left; margin-left: 5px; word-wrap: break-word; height: auto;"> <b style = "color: white;"> <u>Requester</u></b>:<br>  {{text}}</h4>
+{{else}}
+<h4 style = "text-align: right; word-wrap: break-word; height: auto; color: #A8CFDE; margin-right: 8px;"> <b style = "color: White; "> <u>Me</u></b>: <br>{{text}}  </h4>
+{{/if}}
+</div>
+</template>
+
+
+
+<template   name="todoItem">
+<div style = "border-style: solid; padding-bottom: 10px; height: auto; overflow-x: hidden;
+border-color: black; border-width : thin; margin-bottom: 15px; margin-right: 50px; background-color: #333; height: 50%;">
+    <label style = " cursor: pointer; display:inline-block; margin-top: 12px; margin-left: 20px; color: white; " > <b>Task Name:</b> {{name}}<h6 style = "display:inline-block; position:absolute; left: 70px;  color:#C9C9C9;"> Creation Time: {{createdAt}}</h6></label>
+
+    {{#if isCompleted}}
+       <p style = "cursor: default; display:inline-block; float: right; margin-right: 50px; color: #77FF00; position:relative; left: 10px; top: 5px;" > Completed</p>
+       {{else}}
+       <p style = "cursor: default; display:inline-block; float: right; margin-right: 50px; color: red; position:relative; left: 10px; top: 5px;"> Not Completed</p>
+       {{/if}}
+
+
+</div>
+
+</template>

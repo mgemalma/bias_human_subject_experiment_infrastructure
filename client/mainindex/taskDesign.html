@@ -1,0 +1,302 @@
+<template name = "manager">
+  <style>
+    .Text
+    {
+        font-size: 10pt;
+    }
+
+    </style>
+    <p class = "Text"></p>
+    <p class = "Text">Page is loading...</p>
+    <p class = "Text">If this is taking too long, please refresh the page!</p>
+<body>
+  {{#if showEnd}}
+  {{/if}}
+  </body>
+</template>
+
+<template name = "end">
+
+  {{#if currentUser}}
+  <style>
+
+    body
+    {
+      background-color: #FFFFFF;
+    }
+
+    .Text
+    {
+        font-size: 40pt;
+    }
+
+    .information
+    {
+        font-size: 20pt;
+    }
+
+    .Button {
+      background-color: #555555;
+      border: outset;
+      color: white;
+      padding: 15px 50px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+    }
+  </style>
+  <p class = "Text">Congratulations!</p>
+  <p class = "Text">You completed the HIT!</p>
+  <p class = information>To upload your answers into AMT and get your payment, please click on the SUBMIT Button!</p>
+  <input id = "Submit" class = "Button" type = "submit" value = "SUBMIT">
+  <script>
+  var button= document.getElementById('Submit');
+  button.onclick = function()
+  {
+    var user = UserAdv.findOne({"_id" : Meteor.userId()});
+    var nextIndex = user.currentIndex;
+    if (nextIndex - Session.get("num_of_demographics") > Session.get("TotalStatements"))
+    {
+        button.disabled = true;
+        return;
+
+    }
+    nextIndex++;
+    //Order.update(Meteor.userId(), { $set: { currentIndex : nextIndex }});
+    UserAdv.update(Meteor.userId(), { $set: { currentIndex : nextIndex }});
+    button.disabled = true;
+    if (user != undefined)
+    {
+      var str= "https://www.mturk.com/mturk/externalSubmit?assignmentId="+user.assignment_Id.toString()+"&Finished=Submit";
+           // var str = "" + user.turkSubmitTo + user.assignment_Id.toString()+"&Finished=Submit";
+		    //var str="https://workersandbox.mturk.com/mturk/externalSubmit?assignmentId="+assignment_Id.toString()+"&Finished=Submit";
+		      Meteor.setTimeout(function(){window.location.href = str;},500);
+      }
+  }
+  </script>
+
+  {{/if}}
+</template>
+
+<template name = "taskDesign">
+
+     {{#if currentUser}}
+  <style>
+    body
+    {
+      background-color:#FFFFFF;
+    }
+    #Statement
+    {
+      background-color: #DDDDDD;
+      border: 10px;
+      border-style: outset;
+      padding: 20px;
+      width: 700px;
+      margin: 0 auto;
+      font-family: Arial, Helvetica;
+      font-size: 16pt;
+
+    }
+    .Option
+    {
+
+
+      text-align: left;
+
+
+    }
+    .responseButton
+    {
+      text-align: left;
+      text-color: white;
+    }
+    .req
+    {
+      text-color: #000000;
+    }
+    #test
+    {
+      color: red;
+    }
+
+    .Button {
+      background-color: #555555;
+      border: outset;
+      color: white;
+      padding: 15px 50px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+    }
+
+    *
+    {
+        font-size: 18px;
+    }
+    .LEFT
+    {
+      text-align: left;
+      padding: 10px;
+    }
+
+    .radiobtn {
+  position: relative;
+  display: block;
+  text-align: left;
+}
+.radiobtn label {
+  display: block;
+  background: #B3B6B7;
+  color: black;
+  border-radius: 5px;
+  padding: 10px 20px;
+  border: 2px solid white;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+.radiobtn label:after, .radiobtn label:before {
+  content: "";
+  position: absolute;
+  right: 11px;
+  top: 11px;
+  width: 20px;
+  height: 20px;
+  border-radius: 3px;
+  background: black;
+}
+.radiobtn label:before {
+  background: transparent;
+  -webkit-transition: 0.1s width cubic-bezier(0.075, 0.82, 0.165, 1) 0s, 0.3s height cubic-bezier(0.075, 0.82, 0.165, 2) 0.1s;
+  transition: 0.1s width cubic-bezier(0.075, 0.82, 0.165, 1) 0s, 0.3s height cubic-bezier(0.075, 0.82, 0.165, 2) 0.1s;
+  z-index: 2;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-size: 13px;
+  background-position: center;
+  width: 0;
+  height: 0;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNS4zIDEzLjIiPiAgPHBhdGggZmlsbD0iI2ZmZiIgZD0iTTE0LjcuOGwtLjQtLjRhMS43IDEuNyAwIDAgMC0yLjMuMUw1LjIgOC4yIDMgNi40YTEuNyAxLjcgMCAwIDAtMi4zLjFMLjQgN2ExLjcgMS43IDAgMCAwIC4xIDIuM2wzLjggMy41YTEuNyAxLjcgMCAwIDAgMi40LS4xTDE1IDMuMWExLjcgMS43IDAgMCAwLS4yLTIuM3oiIGRhdGEtbmFtZT0iUGZhZCA0Ii8+PC9zdmc+);
+}
+.radiobtn input[type="radio"] {
+  display: none;
+  position: absolute;
+  width: 100%;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+}
+.radiobtn input[type="radio"]:checked + label {
+  background: white;
+  -webkit-animation-name: blink;
+          animation-name: blink;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  border-color: white;
+}
+.radiobtn input[type="radio"]:checked + label:after {
+  background: black;
+}
+.radiobtn input[type="radio"]:checked + label:before {
+  width: 20px;
+  height: 20px;
+}
+
+@-webkit-keyframes blink {
+  0% {
+    background-color: #B3B6B7;
+  }
+  10% {
+    background-color: #B3B6B7;
+  }
+  11% {
+    background-color: #B3B6B7;
+  }
+  29% {
+    background-color: #B3B6B7;
+  }
+  30% {
+    background-color: #B3B6B7;
+  }
+  50% {
+    background-color: #B3B6B7;
+  }
+  45% {
+    background-color: #B3B6B7;
+  }
+  50% {
+    background-color: #B3B6B7;
+  }
+  100% {
+    background-color: #B3B6B7;
+  }
+}
+
+@keyframes blink {
+  0% {
+    background-color: white;
+  }
+  10% {
+    background-color: white;
+  }
+  11% {
+    background-color: white;
+  }
+  29% {
+    background-color: white;
+  }
+  30% {
+    background-color: white;
+  }
+  50% {
+    background-color: white;
+  }
+  45% {
+    background-color: white;
+  }
+  50% {
+    background-color: white;
+  }
+  100% {
+    background-color: white;
+  }
+}
+
+#Progress
+{
+  font-size: 23px;
+  font-weight: bold;
+}
+
+  </style>
+<div id="Statement">
+
+  <form>
+    <p id= "Progress" class= "Option"> {{progress}} </p>
+<p class = "Option">Read the following statement carefully and decide whether in a debate about “should more gun control laws be enacted?” whether it would be more likely to be used as an argument by a person holding liberal views or a person holding conservative views.</p>
+<p id= "Sentence" class= "Option"> <i>{{getText}}</i></p>
+<p class = "Option"> <span > <b>Would this statement more likely be used as an argument by a person holding liberal views or a person holding conservative views in the debate?</b> </span> <span id="test"></span></p>
+<div class="radiobtn">
+<input type="radio" id="conservative" name="question" value="Conservative"> <label for="conservative">Conservative</label>
+</div>
+<div class="radiobtn">
+  <input type="radio"  id="liberal" name="question" value="Liberal"> <label for="liberal">Liberal</label>
+</div>
+<input class = "Button" type = "submit" value = "Next">
+</form>
+</div>
+{{else}}
+{{isUser}}
+
+ {{/if}}
+
+</template>
+
+<template name = "blank">
+  </template>

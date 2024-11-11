@@ -1,0 +1,97 @@
+<template name = "inst">
+<style>
+  body
+  {
+    background-color: #FFFFFF;
+  }
+
+      #Statement
+      {
+        background-color: #DDDDDD;
+        border: 10px;
+        border-style: outset;
+        padding: 20px;
+        width: 700px;
+        margin: 0 auto;
+        font-family: Arial, Helvetica;
+        font-size: 16pt;
+        text-align: left;
+
+      }
+      .right
+      {
+        text-align: left;
+      }
+
+      *
+      {
+          font-size: 18px;
+
+      }
+      .LEFT
+      {
+        text-align: left;
+        padding: 10px;
+      }
+
+      .button {
+        background-color: #555555;
+        border: outset;
+        color: white;
+        padding: 15px 50px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+      }
+  </style>
+  {{#if currentUser}}
+  <div>
+    <div id="Statement" align="center">
+      <table id="profile" class="table-style-one">
+        <tr>
+          <td colspan="4" style=" background-color:black; color: white; font-size:23px; text-align:center;" id="step1"><b>Instructions</b></td>
+        </tr>
+        <tr>
+          <p class= "instructions">
+            In this HIT, you will be asked to review a sequence of 13 statements related to “gun control”. For each of the statements, you are asked to evaluate that in a debate about “should more gun control laws be enacted?”, whether the statement is more likely to be used as an argument by a person holding liberal view or a person holding conservative view to support his/her view.
+            <br>
+            More specifically, for each statement, you are asked to choose from one of the two options:
+
+          </p>
+          <p>
+            &nbsp; •	“Liberal”: if you believe the statement is more likely to be used by a person holding liberal view to support his/her view  in the debate, please select this option.
+            <br>
+            <br>
+            &nbsp; •	“Conservative”: if you believe the statement is more likely to be used by a person holding conservative view to support his/her view in the debate, please select this option.
+          </p>
+
+
+        </tr>
+
+      </table>
+    </div>
+
+  </div>
+  <input id = "next" class = "button" type="button" value="NEXT">
+  <script>
+  var button= document.getElementById('next');
+  button.onclick = function()
+  {
+    //Session.set("buttonClicked",true);
+    var index = UserAdv.findOne({"_id" : Meteor.userId()});
+    UserAdv.update(Meteor.userId(), { $set: { currentIndex : ++index.currentIndex }});
+    location.reload();
+    //window.location.href = Session.get("path_new") + "/instructions";
+
+    //window.location.href = "/task1";
+    //window.history.pushState("", "", "/task1");
+  //window.location.href = "/task1";
+  }
+  </script>
+  {{else}}
+    {{isUser}}
+  {{/if}}
+</template>
