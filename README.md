@@ -10,7 +10,7 @@ This repository provides the web application and backend infrastructure to colle
 
 ## Implementation Details
 
-Although the web app implementation is mostly basic, please feel free to reach out with any questions. You can contact the author, Meric Altug Gemalmaz, at: [mgemalma@purdue.edu](mailto:mgemalma@purdue.edu).
+Although the web app implementation is mostly kept basic, please feel free to reach out with any questions to the author. You can contact at: [mgemalma@purdue.edu](mailto:mgemalma@purdue.edu).
 
 ### Installation
 
