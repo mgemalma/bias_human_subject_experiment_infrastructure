@@ -8,6 +8,10 @@ This repository supports the data collection infrastructure for the research pro
 ### Overview
 This repository provides the web application and backend infrastructure to collect crowdsourced annotations. The web app is built on Meteor, following a structure similar to other crowd annotation systems, and includes templates and JavaScript files to facilitate data collection across various user interactions.
 
+## Implementation Details
+
+Although the web app implementation is mostly basic, please feel free to reach out with any questions. You can contact the author, Meric Altug Gemalmaz, at: [mgemalma@purdue.edu](mailto:mgemalma@purdue.edu).
+
 ### Installation
 
 1. **Clone the repository**:
